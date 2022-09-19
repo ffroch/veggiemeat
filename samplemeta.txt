@@ -1,0 +1,51 @@
+#sample.id ids the samples get																	
+#miseq.id ids used for miseq sequencing																	
+#pseudoprod pseudomized producer id																	
+#protein.source source of the mainly used protein																	
+#texture product texture																	
+#treatment product treatment from the producer if labelled																	
+#atmosphere packaging atmosphere																	
+#freezing product was frozen at some point																	
+#days left until end of shelflife																	
+#freshness category of freshness f... more than 6 days left until end of shelflife, o…less than 7 days left until end of shelflife																	
+#cebtered_cooking_time_clustered center of the recommended cooking time range clustered in unified time ranges																	
+#bbd_exp best before or expiry date																	
+#additional_recommendations if labelled																	
+#colony_density on PCA plates at 10^2 dilutions high…>300 colonies, medium…10-300 colonies, very low/neg….<10colonies 																	
+#after_opening_clustered recommended storage time in days after opening																	
+#profile according to tSNE plot																	
+#profilelong profile according to tSNE plot																	
+#no.ingredients number of used ingredient for the product																	
+sample.id	miseq.id	pseudoprod	protein.source	texture	treatment	atmosphere	freezing	daysleft	freshness	centered_cooking_time_clustered	bbd_exp	additional_recommendation	colony_density	after_opening_clustered	profile	profilelong	no.ingredients
+A1	Veggie1	producer 1	pea	minced	unclear	MAP	notfrozen	9	f	5-8 min	expiration date	consume only thorougly heated	medium	0	Pro	Proteobacteria	17
+A2	Veggie2	producer 2	pea	minced	raw	MAP	notfrozen	6	o	3-5 min	best before date	consume only thorougly heated	high	0	Pro	Proteobacteria	14
+A3	Veggie3	producer 2	pea	minced	unclear	MAP	notfrozen	3	o	3-5 min	best before date	no rec.	high	0	Le	Leuconostocaceae	13
+A4	Veggie4	producer 1	pea	minced	unclear	MAP	notfrozen	2	o	5-8 min	expiration date	consume only thorougly heated	high	0	Pro	Proteobacteria	18
+A5	Veggie5	producer 2	pea	minced	unclear	MAP	notfrozen	14	f	no rec.	best before date	no rec.	high	0	Le	Leuconostocaceae	13
+A6	Veggie6	producer 3	pea	minced	unclear	noMAP	notfrozen	29	f	3-5 min	best before date	no rec.	very low/neg	1	Pro	Proteobacteria	6
+A7	Veggie7	producer 2	pea	minced	unclear	MAP	notfrozen	13	f	<3 min	best before date	no rec.	high	0	Le	Leuconostocaceae	14
+A8	Veggie8	producer 2	pea	minced	unclear	MAP	notfrozen	6	o	3-5 min	best before date	consume only thorougly heated	high	0	Le	Leuconostocaceae	15
+B1	Veggie9	producer 4	soy	minced	unclear	MAP	notfrozen	52	f	3-5 min	best before date	no rec.	very low/neg	1			10
+B2	Veggie10	producer 5	soy	minced	raw	MAP	frozen	5	o	5-8 min	expiration date	consume only thorougly heated	high	no rec.	La	Lactobacillus	15
+B3	Veggie11	producer 4	soy	minced	unclear	MAP	notfrozen	10	f	3-5 min	best before date	no rec.	very low/neg	1	Pro	Proteobacteria	20
+B4	Veggie12	producer 6	soy	cut	unclear	noMAP	frozen	174	f	5-8 min	best before date	consume only thorougly heated	very low/neg	1	Pro	Proteobacteria	4
+B5	Veggie13	producer 6	soy	cut	unclear	noMAP	frozen	119	f	5-8 min	best before date	consume only thorougly heated	medium	1	Le	Leuconostocaceae	27
+B6	Veggie14	producer 5	soy	minced	raw	MAP	frozen	3	o	>8 min	expiration date	consume only thorougly heated	high	no rec.	La	Lactobacillus	12
+B7	Veggie15	producer 5	soy	minced	raw	MAP	frozen	3	o	>8 min	expiration date	consume only thorougly heated	high	no rec.			21
+B8	Veggie16	producer 3	soy	minced	unclear	noMAP	notfrozen	22	f	3-5 min	best before date	no rec.	very low/neg	1	Pro	Proteobacteria	8
+C1	Veggie17	producer 5	soy	cut	pre-heated	MAP	frozen	13	f	3-5 min	expiration date	no rec.	very low/neg	0	Pro	Proteobacteria	6
+C2	Veggie18	producer 5	soy	minced	pre-heated	MAP	frozen	18	f	5-8 min	expiration date	no rec.	medium	no rec.			22
+C3	Veggie19	producer 5	soy	cut	pre-heated	MAP	frozen	10	f	5-8 min	expiration date	no rec.	medium	no rec.	La	Lactobacillus	16
+C4	Veggie20	producer 5	soy	cut	pre-heated	MAP	frozen	24	f	5-8 min	expiration date	no rec.	medium	no rec.			18
+C5	Veggie21	producer 7	soy	cut	pre-heated	MAP	notfrozen	0	o	3-5 min	best before date	consume only thorougly heated	high	no rec.	Le	Leuconostocaceae	14
+C6	Veggie22	producer 7	soy	cut	pre-heated	MAP	notfrozen	0	o	3-5 min	best before date	consume only thorougly heated	medium	no rec.	Le	Leuconostocaceae	19
+C7	Veggie23	producer 7	soy	cut	pre-heated	MAP	notfrozen	0	o	3-5 min	best before date	consume only thorougly heated	high	no rec.			21
+C8	Veggie24	producer 8	soy	cut	unclear	MAP	notfrozen	8	f	3-5 min	best before date	consume only thorougly heated	high	0	La	Lactobacillus	23
+D1	Veggie25	producer 9	pea	minced	unclear	MAP	notfrozen	10	f	no rec.	best before date	no rec.	high	0	Pro	Proteobacteria	16
+D2	Veggie26	producer 2	pea	cut	unclear	MAP	notfrozen	7	o	no rec.	best before date	no rec.	high	0	Le	Leuconostocaceae	12
+D3	Veggie27	producer 9	pea	cut	unclear	MAP	notfrozen	7	o	no rec.	best before date	no rec.	high	0	Le	Leuconostocaceae	16
+D4	Veggie28	producer 2	pea	cut	unclear	MAP	notfrozen	28	f	3-5 min	best before date	no rec.	high	0	Le	Leuconostocaceae	11
+D5	Veggie29	producer 2	pea	minced	pre-heated	MAP	notfrozen	12	f	no rec.	best before date	no rec.	high	0	Le	Leuconostocaceae	14
+D6	Veggie30	producer 2	pea	cut	unclear	MAP	notfrozen	14	f	3-5 min	best before date	no rec.	high	0	Le	Leuconostocaceae	13
+D7	Veggie31	producer 2	pea	cut	unclear	MAP	notfrozen	12	f	3-5 min	best before date	no rec.	high	0	Le	Leuconostocaceae	13
+D8	Veggie32	producer 2	pea	cut	unclear	MAP	notfrozen	28	f	3-5 min	best before date	no rec.	high	0	Le	Leuconostocaceae	10
