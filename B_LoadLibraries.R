@@ -35,3 +35,13 @@ library(btools)
 
 #remotes::install_github("kstagaman/phyloseqCompanion")
 library(phyloseqCompanion)
+
+#used packageVersion of sangeranalyseR 1.2.0
+if(!require(sangeranalyseR)){
+  install.packages("sangeranalseR")
+  library(sangeranalyseR)
+}
+
+library(Biostrings)
+library(dada2)
+library(stringr)
