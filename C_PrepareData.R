@@ -27,9 +27,37 @@ sample_data(phylo_object)$group<-paste(sample_data(phylo_object)$protein.source,
 
 sample_names(phylo_object)<-sample_data(phylo_object)$sample.id
 
+phylostats<-data.frame("feature"=NA, "value"=NA)
+phylostats[1,]<-c("no. of samples", length(sample_names(phylo_object)))
+phylostats[2,]<-c("overall reads", sum(otu_table(phylo_object)))
+phylostats[3,]<-c("min reads", min(sample_sums(phylo_object)))
+phylostats[4,]<-c("max reads", max(sample_sums(phylo_object)))
+phylostats[5,]<-c("median reads", median(sample_sums(phylo_object)))
+phylostats[6,]<-c("no. of asvs", ntaxa(phylo_object))
+phylostats[7,]<-c("no. of Genera", length(unique(data.frame(tax_table(phylo_object))$Genus)))
+phylostats[8,]<-c("no. of Phyla", length(unique(data.frame(tax_table(phylo_object))$Phylum)))
+phylostats[,2]<-as.numeric(phylostats[,2])
+
+saveRDS(phylostats, file ="./06-outputfiles/phylostats.rds")
+
+rarecstats<-data.frame("feature"=NA, "value"=NA)
+rarecstats[1,]<-c("no. of samples", length(sample_names(rarec)))
+rarecstats[2,]<-c("overall reads", sum(otu_table(rarec)))
+rarecstats[3,]<-c("min reads", min(sample_sums(rarec)))
+rarecstats[4,]<-c("max reads", max(sample_sums(rarec)))
+rarecstats[5,]<-c("median reads", median(sample_sums(rarec)))
+rarecstats[6,]<-c("no. of asvs", ntaxa(rarec))
+rarecstats[7,]<-c("no. of Genera", length(unique(data.frame(tax_table(rarec))$Genus)))
+rarecstats[8,]<-c("no. of Phyla", length(unique(data.frame(tax_table(rarec))$Phylum)))
+rarecstats[,2]<-as.numeric(rarecstats[,2])
+
+saveRDS(rarecstats, file ="./06-outputfiles/rarecstats.rds")
+
 #replace d__ in taxa object with empty space
 tax <- data.frame(phyloseq::tax_table(phylo_object)[, 1]) %>%
   mutate(Kingdom = stringr::str_replace_all(Kingdom, "d__", ""))
 tax_mat <- as.matrix(tax)
 rownames(tax_mat) <- phyloseq::taxa_names(phylo_object)
 phyloseq::tax_table(phylo_object)[,1] <- tax_mat
+
+isometa<-read.table("./01-metadata/isolatemeta.txt",sep="\t",header=T)

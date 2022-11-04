@@ -53,15 +53,28 @@ source("F3_BetaDiv_PERMANOVA.R")
 source("G1_LEfseExport.R")
 
 #use LEfse prepared data for group comparison including correction for muliltple comparisons
-source("G2_LEfse_mulcticomp.R")
+source("G2_LEfse_multicomp.R")
 
 #OPTIONAL: hand made LEfse plots
 #source("G3_LEfse_plots.R")
 
 
+#ONLY THE FIRST TIME OR WHEN CHANGING QUALITY PARAMETERS processing the sanger sequenced isolates
+#source("H1_IsolateSeq_Import_Trimming.R")
 
+#ONLY THE FIRST TIME OR WHEN CHANGING QUALITY PARAMETERS call trimmed Sanger sequences
+#source("H2_IsolateSeq_FastaImport.R")
 
+#ONLY THE FIRST TIME OR WHEN CHANGING QUALITY PARAMETERS assign taxonomy to SILVA 138.1 database
+#source("H3_IsolateSeq_TaxonomyR.R")
 
+#blastcorrection 
+source("I1_Blastcorrection.R")
 
+source("I2_Isolates.R")
 
+#same sample isolate sequences clustering
+source("J1_ClusteringIsolates.R")
 
+#plot figure 2
+source("K0_Fig2_3percent_grouped_by_group.R")

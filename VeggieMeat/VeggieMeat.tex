@@ -1,0 +1,729 @@
+\documentclass[preprint, 3p,
+authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
+%%% Begin My package additions %%%%%%%%%%%%%%%%%%%
+
+\usepackage[hyphens]{url}
+
+  \journal{An awesome journal} % Sets Journal name
+
+\usepackage{lineno} % add
+  \linenumbers % turns line numbering on
+
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%% end my additions to header
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={Plant-based meat alternatives and their associated microbial communities},
+            colorlinks=false,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+
+\setcounter{secnumdepth}{5}
+% Pandoc toggle for numbering sections (defaults to be off)
+
+
+% tightlist command for lists without linebreak
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+\usepackage{setspace}
+\doublespacing
+\usepackage{caption}
+
+
+
+\begin{document}
+
+
+\begin{frontmatter}
+
+  \title{Plant-based meat alternatives and their associated microbial
+communities}
+    \author[LMM]{Franz-Ferdinand Roch%
+  %
+  }
+  
+    \author[LMM]{Monika Dzieciol%
+  %
+  }
+  
+    \author[LMM]{Narciso Martin Quijada%
+  %
+  }
+  
+    \author[LMM]{Patrick-Julian Mester%
+  %
+  }
+  
+    \author[LMM]{Narciso Martin Quijada%
+  %
+  }
+  
+    \author[LMM]{Evelyne Selberherr%
+  \corref{cor1}%
+  }
+   \ead{evelyne.selberherr@vetmeduni.ac.at} 
+      \affiliation[LMM]{Unit of Food Microbiology, Institute of Food
+Safety, Food Technology and Veterinary Public Health, Department for
+Farm Animals and Veterinary Public Health, University of Veterinary
+Medicine Vienna}
+    \cortext[cor1]{Corresponding author}
+  
+  \begin{abstract}
+  This is the abstract. It consists of two paragraphs.
+  \end{abstract}
+    \begin{keyword}
+    keyword1 \sep 
+    keyword2
+  \end{keyword}
+  
+ \end{frontmatter}
+
+\hypertarget{introduction}{%
+\section{Introduction:}\label{introduction}}
+
+For most of the population of the Western world, meat consumption is an
+integral part of their diet. An average U.S. American consumed 100kg and
+a European Union citizen 69kg of meat in 2021. The global meat
+consumption increased from 21kg per year and capita in 1990 to 34kg in
+2021 (OECD data). Although the OECD estimates that consumption will
+level off at around 35kg per year and capita by 2030, the total meat
+consumption will further increase with population growth. This globally
+growing appetite for meat is linked to livestock farming and
+consequently plays a major role in the ecological issues we are
+currently facing. Land degradation, climate change, water pollution and
+biodiversity loss are just some of the notable consequences for the
+environment \citep{Steinfeld.2006, Bianchi.2018}. Additionally, common
+industrial animal husbandry influences public health by supporting the
+spread of antibiotic resistances and vector-borne disease
+\citep{Economou.2015, Bianchi.2018, Watts.2018}. Apart from this, high
+meat consumption, as practiced in the Western world and increasingly in
+transition countries, contributes significantly to many widespread
+common diseases, which, in addition to individual illnesses, also burden
+health care systems
+\citep{Micha.2010, Chan.2011, Parkin.2011, Feskens.2013}. Animal
+welfare, environmental issues and increased health awareness are main
+drivers for more and more people in western civilization to change their
+meat consumption routines (\citet{StollKleemann.2017};
+\citet{Ploll.2020}{]}. In a survey, conducted 2021 in ten different
+European countries, 2\% of the participants referred to themselves as
+vegan, 5\% as vegetarians, 3\% as pescetarians and 30\% as flexitarians
+\citep{EuropeanUnionsHorizon2020reasearchandinnovationprogramme.2021b}.
+The last group is characterized, among other things, by the fact that
+they want to reduce their meat consumption, but do not want to give up
+the positive experience that comes with it. As main target group,
+flexitarians account for 90-95\% of the sales of vegan and vegetarian
+products. A market research within ``The Smart Protein Project'' noted a
+sales value increase of 82\% for plant-based meat (vegan and vegetarian)
+within 2018 and 2020 for Austria
+\citep{EuropeanUnionsHorizon2020reasearchandinnovationprogramme.2021}.
+The sales of this product group and the number of different products
+have increased strongly over the last few years
+\citep{Curtain.2019, EuropeanUnionsHorizon2020reasearchandinnovationprogramme.2021}.
+Despite the increased consumption of these products, there have been
+only a few studies on their microbiological properties. However, these
+would be important for ensuring food safety, characterizing potential
+hazards, assessing risks, and for sustainability questions. Since two of
+the UN's sustainability goals (goal 2 -- zero hunger and 12 --
+responsible consumptions and production) affects our eating habits,
+increased attention should be paid to reducing food waste. As 30\% of
+food products in primary processing does not even reach the consumer,
+mainly because of microbial spoilage or pathogen contamination, it is
+essential to improve the knowledge of the microbial communities of our
+food, which could help to increase the shelf life and reduce the
+contamination with pathogens. Still largely unanswered is the question
+if and how a high microbial diversity on food (consisting of living and
+dead microbiota) can have a positive effect on consumer's health. For
+example, a high microbial diversity permanently stimulates the innate
+and adaptive immune system and provides resistance against colonizing
+pathogens \citep[\citet{Mackowiak.1982},
+\citet{Smith.2007}]{Crowe.1973}. It was also supposed recently, that the
+loss of microbial diversity including the disappearance of ancestral
+indigenous microbiota, which is currently happening in western
+countries, affects human health and contributes to post-modern
+conditions such as obesity and asthma \citep{Blaser.2009, Vangay.2018}.
+For all these research questions fundamental knowledge on the microbial
+compositions on food are necessary, but still lacking. Since, little is
+known on these products, we sampled a selection of plant-based meat
+alternatives available in Austria's supermarkets to investigate the
+general microbial community patterns. Further we described
+characteristic microbial profiles and compared four groups of the most
+common product types (pea and soybean based products with either
+``minced'' (minced meat, burgers, etc.) or ``fibrous'' (meat chunks,
+Schnitzel, etc.) texture. We hypothesized that products within one group
+have, based on similar protein processing, more similar communities than
+between the groups. Since we examined a relatively undescribed product
+group, we have chosen a combined approach using culture-dependent and
+culture-independent techniques. This allowed a more complete description
+of the microbial community than any of the applications could stand on
+their own, but also raised additional questions and uncertainties that
+are relevant to future microbial research of (highly processed) foods.
+
+\hypertarget{material-and-methods}{%
+\section{Material and Methods}\label{material-and-methods}}
+
+\hypertarget{sample-acquisition}{%
+\subsection{Sample acquisition}\label{sample-acquisition}}
+
+We purchased 32 different plant-based meat alternative products, between
+July 12 and July 14, 2021, from four supermarket groups. Pea- and
+soybean- protein based products with either a minced or a fibrous
+structure were the most common representatives of this product group at
+this time point in Austria. Additional criteria for the selection were,
+that the products where entirely plant-based (vegan) and do not contain
+fermented products, like tofu. Beside these characteristics, the samples
+were different in their composition, packing, shelf-life etc. (Table 1).
+All samples, including two frozen products, were transported
+refrigerated and stored at 4°C until processing. Sample processing took
+place within the minimum shelf life range and latest five days after
+purchase.
+
+\hypertarget{sample-preparation}{%
+\subsection{Sample preparation}\label{sample-preparation}}
+
+In total, 10 g of each sample, representing all layers of a product,
+were placed in sterile Stomacher bags and diluted with 90 ml sterile
+PBS. A Stomacher \ldots{} was used to mechanically comminute the samples
+for 120 s. To remove coarse food particles, 45 ml of the homogenate was
+centrifuged at 300 relative centrifugal force(rcf) for 2 min at room
+temperature using an Eppendorf Centrifuge 5810R and an A-4-62 rotor. The
+remaining supernatants were transferred to new tubes and centrifuged at
+3,000 rcf (30 min at RT). The obtained cell pellets were diluted
+10-times with sterile phosphate buffered saline (PBS).
+
+\hypertarget{bacterial-and-fungal-isolation}{%
+\subsection{Bacterial and fungal
+isolation}\label{bacterial-and-fungal-isolation}}
+
+We carried out two sets of cultivation experiments. The first set was
+more general with a basic set of non-selective and selective media
+(Columbia agar, Violet Red Bile Dextrose agar (VRDB), brain heart
+infusion agar (BHI), plate count agar (PCA), Rose Bengal (RB), and Baird
+Parker (BP) agar), to get a broad range of the expected microbial
+community. The plates were inoculated with a 102 dilution and
+aerobically and semi-anaerobically incubated at 37°C. In order to
+recover high amounts of different isolates, the plates where incubated
+for 16-68 hours, depending on colony size and growth density. Samples
+with too high growth densities after 16 h for picking single colonies
+were diluted 103 or 104 in sterile PBS and plated again. For the second
+media set we used the information from the 16s rRNA ampicon sequencing
+to select specific media and growth conditions in order to isolate
+representatives of genera we could not isolate under the first set's
+conditions. Depending on the sample specific microbial composition we
+used Luria Bertani-, nutrient-, tryptic soy-, marine-, corynebacteria-,
+De-Man-Rogosa-Sharpe- and pseudomonas agar and cultivated the samples
+(dilution 102-105) anaerobically at 25°C for 48h. In both sets we
+selected morphologically unique, single colonies for re-cultivation and
+Sanger sequencing. DNA was extracted, using a protocol modified after
+Walsh et al. \citep{Walsh.2013}, by lysing pure cultures with
+100\(\mu\)l 0.01M Tris-HCl and 400\(\mu\)l 2.5\% Chelex 100 resin
+solution (BioRad) at 95°C for 10min, followed by centrifugation with
+15,000 rcf for 30 sec.~The supernatants were subsequently used for 16S
+rRNA gene PCR, using a final concentration of 200nM of each of the
+universal Primers from LGC (27F -- 5'-GAG TTT GAT CMT GGC TCA G-3' and
+1492R -- 5'-GGY TAC CTT GTT ACG ACT T-3'), 0.025 U/\(\mu\)l
+Invitrogen\textsuperscript{TM} Platinum\textsuperscript{TM} Taq
+DNA-Polymerase, 1x TaqMan PCR buffer, 2mM MgCl2, and 250nM dNTP Mix
+(Thermo Scientific\textsuperscript{TM}). For the reaction a protocol of
+95°C for 5 min (Taq activation) followed by 35 cycles of 40 seconds at
+95°C (denaturation) 40 seconds at 52°C (annealing ) and 1 minute at 72°C
+(elongation) was used. For negative control a reaction with ddH20 as
+well as a reaction the negative extraction control were performed.
+In-house Listeria monocytogenes DNA served as positive control. All PCR
+products were checked with a QIAxcel DNA High Resolution Kit in a
+QIAxcel Advanced system. Negative PCR results were followed by an ITS2
+gene PCR (200nM of each of the primers ITS3-5'-GCATCGATGAAGAACGCAGC-3'
+and ITS4-5'-TCCTCCGCTTATTGATATGC-3' (White et al.~1990), 0.025
+U/\(\mu\)l Invitrogen\textsuperscript{TM} Platinum\textsuperscript{TM}
+Taq DNA-Polymerase, 1x TaqMan PCR buffer, 2mM MgCl2, and 250nM dNTP Mix
+(Thermo Scientific\textsuperscript{TM}), with a protocol of 95°C for 5
+min (Taq activation) followed by 30 cycles of 40 seconds at 94°C, 40
+seconds at 56°C and 1 minute at 72°C). For cultures, negative in 16S
+rRNA and ITS2 PCR, we repeated the extraction with the NucleoSpin tissue
+kit (Machery-Nagel), using the manual in combination with the
+recommendations for hard to lyse bacteria. LGC Genomics GmBH (Berlin)
+purified and sequenced the PCR products in one direction (using 27F
+primer for 16S rRNA and ITS4 for the ITS2 region). For quality trimming
+we used ``method 2'' (with a defined sliding window of 15 bp and an
+Phred score mean quality of 40) within the ``SangerRead'' function
+(``sangeranalyseR'' package; R {[}\citet{R} Core Team 2021)). Trimmed
+sequences, with \textgreater100 bp length, were classified with the
+``assignTaxonomy'' function of the ``dada2'' package in R (with kmer
+size 8 and 50 bootstrap replicates), based on a RDP Naïve Bayesian
+Classifier algorithm (Wang et al.~2007). Potential pathogens and
+unclassified Enterobactericeae were further whole genome sequenced on a
+MinIon MK\ldots{}
+
+\hypertarget{bacterial-quantification-and-composition}{%
+\subsection{Bacterial quantification and
+composition}\label{bacterial-quantification-and-composition}}
+
+For direct DNA extraction the DNeasy PowerFood kit was used. That for,
+the in RNAlater stored cell pellets were thawed, centrifuged (3,000×g,
+30min) and resuspended in ??? \(\mu\)l MBL buffer. Deviating from the
+DNeasy PowerFood protocol, the lysis step was proceeded in \ldots{}
+tubes. The further steps were processed according to the protocol. The
+elution step was done twice with 30\(\mu\)l sterile water, respectively.
+Parallel an extraction of pure water was performed as negative
+extraction control (NEC) Sequencing libraries of the 16S rNRA gene (V3/4
+region) were prepared based on Illumina 16S Metagenomic Sequencing
+Library Preparation recommendations. Primers 341F
+(5′-CCTACGGGNGGCWGCAG-3′) and 805R (5′-GAC TAC HVG GGT ATC TAA TCC-3′)
+(Klindworth et al.~2013) were used together with Illumina adapter
+sequences (5′ CGT CGG CAG CGT CAG ATG TGT ATA AGA GAC AG-3′ and 5′ GTC
+TCG TGG GCT CGG AGA TGT GTA TAA GAG ACA G-3′, respectively) for
+amplification. Libraries were constructed by ligating sequencing
+adapters and indices onto purified PCR products using the Nextera XT
+Sample Preparation Kit (Illumina). Equimolar amounts of each of the
+purified amplicons were pooled and sequenced on an Illumina MiSeq
+Sequencer with a 300-bp paired-end read protocol. 16S rRNA gene amplicon
+library generation and sequencing was performed at the Vienna Biocenter
+Core Facilities NGS Unit (www.vbcf.ac.at).
+
+\hypertarget{sequence-processing-and-statistics}{%
+\subsection{Sequence Processing and
+Statistics}\label{sequence-processing-and-statistics}}
+
+The data obtained from the MiSeq sequencing went through a Qiime2
+workflow including demultiplexing and DADA2 denoising and QC filtering.
+The taxonomic classification was done with the Scikit-learn algorithm
+using a pre-trained full-length-uniform-classifier based on the SILVA
+138.1 database. After removal of sequences with mitochondrial or
+chloroplastic origin, further analyses were performed with R. To
+estimate the alpha-diversities of the samples Hill-Simpson and
+Hill-Shannon diversity were calculated using the ``iNEXT'' package,
+based on 99.5\% coverage rarefied samples (Roswell et al.~2021). Group
+comparisons were done with Kruskal-Wallis tests followed by
+Bonferroni-alpha-corrected Dunn's tests for pairwise comparisons. For
+beta diversity analyses the samples were rarefied with 100 iterations
+based on a coverage of 99.5\% using the package ``phyloseq'' and
+``metagMisc'' {[}\citet{Chao} und Jost 2012). Based on that we generated
+distance matrices with Bray-Curtis dissimilarities, Jaccard indices and
+Jensen-Shannon divergence and use them for graphical (t-distributed
+stochastic neighbor embedding - tSNE) and statistical (PERMANOVA, LEfse)
+analysis. For tSNE we used the ``Rtsne'' package with a maximum of 1000
+iterations, a perplexity of 5 and two initial dimensions, as recommended
+by Oskolkov {[}\citet{Oskolkov} 2019). The high variability of the
+products and little knowledge on the underlying production conditions
+made it impossible to find adequate variables for PERMANOVA, but the
+main protein source and the texture. The producing facility as
+additional variable would be meaningful, but the product assortment is
+dominated by one company, which made the model design very unbalanced.
+PERMANOVA was done with the ``vegan'' package using ``betadisp'' to
+check for homogeneous dispersion and ``adonis'' functions for PERMANOVA
+with 999 iterations using main protein source and texture as explanation
+variables. Lefse was done with the relative abundance data of the
+coverage rarefied data in combination with ``phyloseqCompanion'' R
+package, for data transformation and the Lefse Bioconda tool by \ldots,
+using the protein source and texture as class, a normalization of 1
+million and a log\textsubscript{10} LDA score threshold of 4.0. In
+parallel, a group comparison for the same features, as examined with
+Lefse, was done with Kruskal-Wallis tests followed by a
+Benjamin-Hochberg alpha correction. The Sanger sequences from the
+Isolates were trimmed using the ``sangeranalyseR'' package with a
+Quality Score Cutoff of 40 and a sliding window size of 15. Sequences
+with a minimum length of 100bp and a trimmed mean quality score
+\textgreater35 were used for taxonomic classification based on the SILVA
+138.1 database. Further, the isolate sequences were assigned to a
+database generated from the MiSeq data to connect the culture-based and
+culture-independent approaches. For figure 1, the isolate sequences of
+each genus were clustered within each sample, group and producer using
+the IdClusters function from the ``DECIPHER'' package with a cutoff of
+0.06. More clusters within each genus were interpreted as a higher
+species or strain diversity within each genus. Selected isolates were
+whole genome sequenced with the MinIon, using\ldots{} The obtained data
+were trimmed and filtered with filtlong, assembled with Flye followed by
+several polishing steps (four repetitions of racon and a final step with
+medaka), before they were used in the TORMES workflow.
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\hypertarget{product-descriptions}{%
+\subsection{Product descriptions}\label{product-descriptions}}
+
+The four groups did not have the same sizes, since the product portfolio
+for each group was not large enough. Still, we had an overall of 16
+pea-based and 16 soybean-based products (Table 1). Beside the four main
+properties, the products were quite diverse. Particularly noteworthy is
+the number of ingredients used per product (4-27, with a total of about
+120 different used ingredients within the 32 sampled products) and the
+large range of shelf life. The products are also different on factors,
+which might influence the bacterial composition, i.e.~pre-heating or
+freezing steps, as well as packing in modified atmosphere. Most of the
+products had clear cooking instructions on the labels, including the
+recommendation for thorough cooking (Table 1). In total, 27 samples were
+packed in modified atmosphere with unknown composition. Out of 30
+samples sold refrigerated (the other two frozen) six products were
+frozen at any point during the retail chain (Table 1).
+
+\hypertarget{cultivable-microbial-communities}{%
+\subsection{Cultivable microbial
+communities}\label{cultivable-microbial-communities}}
+
+In total, 465 colonies were picked and selected for 16S rRNA or ITS gene
+sequencing. Among these, 431 could be classified to the genus level,
+representing 38 genera in four different phyla (Figure 1). The remaining
+isolates could only be assigned to family level (n=16, all
+Enterobactericeae), were fungi (n=15; Wickerhamomyces (n=7),
+Issatchenkia (n=6), Yarrowia (n=1), Dipodascus (n=1)), or stayed
+unassigned (n=3). We isolated Bacillus from 19, Leuconostoc from 18,
+Enterococcus from 12, Latilactobacillus from 10 samples. Species from
+the genus \emph{Bacillus}, Leuconostoc and Latilacto\emph{Bacillus}
+could be isolated from each of the four sample groups.
+\emph{Enterobacteriaceae}, which are usually surveyed as an additional
+hygiene criterion, were only found in the pea protein products of a
+single manufacturer (Figure 1). A selection of these
+\emph{Enterobacteriaceae} and isolates classified as potential pathogens
+(i.e.~\emph{Staphylococcus aureus}, \emph{Bacillus cereus} group,
+\emph{Klebsiella} sp.) were whole genome sequenced with a MinION device.
+DATA MISSING
+
+\hypertarget{lactic-acid-bacteria-and-gamma-proteobacteria-dominate-the-16s-rrna-amplicon-sequences}{%
+\subsection{\texorpdfstring{Lactic acid bacteria and
+gamma-\emph{Proteobacteria} dominate the 16S rRNA amplicon
+sequences}{Lactic acid bacteria and gamma-Proteobacteria dominate the 16S rRNA amplicon sequences}}\label{lactic-acid-bacteria-and-gamma-proteobacteria-dominate-the-16s-rrna-amplicon-sequences}}
+
+In total, 28 samples (883,866 sequences; median frequency per sample:
+25,627; range: 439-253,681) passed the quality criteria and were
+processed with QIIME 2. Because we used coverage based rarefaction (with
+a coverage of 99.5) and all of the remaining samples meat this coverage,
+we removed none of them for further analysis. Over all samples, the ASVs
+were assigned to 25 different Phyla, however, only three Phyla with
+\textgreater3\% in at least one of the samples were found
+(i.e.~\emph{Firmicutes} 0.00-0.95\%, \emph{Proteobacteria} 0.00-0.31\%,
+\emph{Bacteroidota} 0.00-0.11\%). In total, 18 samples were dominated
+(\textgreater50\% relative abundance) by \emph{Firmicutes} (10 samples
+with \textgreater90\%), while in the other 10 samples
+\emph{Proteobacteria} is the most abundant Phylum. The most common
+genera were \emph{Leuconostoc} (detected in 26 samples; 0.03-100.00\%
+rel. abundance), \emph{Latilactobacillus} (detected in 21 samples;
+0.02-86.38\% rel. abundance), \emph{Pseudomonas} (detected in 21
+samples; 0.36-35.25\% rel. abundance), \emph{Serratia} (detected in 19
+samples; 0.03-8.92\% rel. abundance), and Acinetobacter (detected in 18
+samples; 0.09-15.40\% rel. abundance). The genus Leuconostoc was the
+most abundant in 13 samples, followed by Latilactobacillus (4 products),
+and Shewanella (4 products) (Figure 2). Some genera were found
+proportionally high (≥10\%) in one or more samples, but could not be
+isolated (i.e.~\emph{Shewanella}, \emph{Xanthomonas},
+\emph{Photobacterium}, \emph{Myroides}, \emph{Pediococcus}).
+
+\hypertarget{protein-source-and-texture-are-not-the-main-driver-for-the-community-pattern}{%
+\subsection{Protein source and texture are not the main driver for the
+community
+pattern}\label{protein-source-and-texture-are-not-the-main-driver-for-the-community-pattern}}
+
+The Kruskal-Wallis tests comparing the alpha-diversity indices
+(i.e.~Hill-Shannon index and Hill-Simpson index) between the four groups
+(based on proteins source and texture) were significant (p.value = 0.018
+and 0.049), but in post-hoc Dunn's test with Bonferroni alpha adjustment
+only the Hill-Shannon index between groups ``pea-fibrous'' and
+``pea-minced'' differed significantly (p.value= 0.015 - Supplement
+Figure xy). The group dispersions were homogenous in all examined
+distance methods (i.e.~Bray-Curtis, Jaccard, JSD). The PERMANOVA showed
+that texture and protein source significantly affects the microbial
+composition (Supplement Table 2), but explained only between
+15.4629221and 22.7898534\% of the total variance. The variance
+explanation by the PERMANOVA would increase, if the manufacturer as
+variable was added to the model, but since the sampling was very
+unbalanced on that, we avoided this step.
+
+LEFSE FEHLT HIER
+
+\hypertarget{s-rrna-sequencing-revealed-three-distinct-community-profiles}{%
+\subsection{16S rRNA sequencing revealed three distinct community
+profiles}\label{s-rrna-sequencing-revealed-three-distinct-community-profiles}}
+
+In the tSNE plot we see three distinct clusters (Figure 3), which we
+described, based on the dominating genera as \emph{Leuconostocaceae}-,
+\emph{Latilactobacillus}- and \emph{Proteobacteria}-profiles. The
+clustering is traceable, when comparing the similarity of the relative
+abundance patterns of the samples within each cluster. underlined the
+heterogenic microbial pattern of Figure 2. Although there is some
+clustering, there is no clear separation based on the examined variables
+(main protein source, status, manufacturer).
+
+ALPHA DIV AND LEFSE FOR PROFILES LEfSe identified 32 discriminative
+features with an LDA Effect Size \textgreater4.0 (Fig 3). This analysis
+highlighted a predominance of Leuconostocaceae (log LDA 5.48) and its
+classification levels above in pre-cooked pea products. It identified
+\emph{Proteobacteria} (log LDA 5.33) as most characteristic for raw pea
+products, mainly based on the predominance of Pseudomonas (log LDA
+4.81). Highly discriminant for soy products were some low abundant
+features. LEfSe calculated and log LDA score of 4.68 for Acetobacter in
+pre-cooked soy products and of 4.62 for Flavobacteriaceae in raw soy
+products.
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+Highly processed food, like the plant-based meat alternatives we
+examined in this study, brings challenges to microbiologists. The broad
+range of ingredients (\textasciitilde120 in in the 32 examined
+products),different processing steps, and a variety of equipment lead to
+many potential sources for bacterial contamination. The product specific
+production processes were not available, but up to the present low and
+high moisture extrusion are most common commercially used technologies
+to produce meat textured plant proteins. Both methods are based on an
+interaction of heat, shear forces and pressure. The conditions for this
+process depends on the original protein source and the desired protein
+structure. During the extrusion, the protein dough undergoes temperature
+gradients between starting at room temperature and ending between 130
+and 160°C at a pressure of\ldots. Blabla et al., described, that the
+dough remains about two minutes at the final high temperatures.
+Currently, we assume, that only spore forming bacteria like
+\emph{Bacillus} would survive the extrusion process. That is also
+described by Domig et al., who could only isolate \emph{Bacillus} spp.
+from extruded proteins\ldots(i.e.~\emph{Bacillus} and
+\emph{Clostridium}) can survive \citep{Leutgeb.2017}. This could be one
+explanation why was isolated from most of the samples (19/32), while the
+relative abundance of 16S rRNA gene DNA is relatively low, compared to
+other genera. Overall, we assume, due to this initial extrusion
+procedure, the main protein is not the source for most of the living
+bacterial cells we have isolated from the products. The extrusion
+process (and other heating and freezing steps during the production)
+brought challenges for the interpretation of sequencing data. It is in
+the principle of the method that it cannot differentiate between living
+and dead, which raises the question of whether the use of 16S rRNA
+metagenomics is an appropriate means of investigating highly processed
+foods. Along with these processes, there are many changes in the
+environmental conditions for the products and their associated microbial
+communities, like heating, thawing, freezing and cooling steps, but also
+packing in modified atmosphere. These conditional changes could kill or
+inactivate bacterial cells, while their DNA remains largely intact, but
+could also induce viable but nonculturable states
+\citep{Li.2014, Zhao.2017}. We agree, that it should not be used as
+standalone method, but it i) supports culture-based methods and allows
+to adapt media and culture conditions to genera we find in the
+sequencing data, which is especially important for less examined
+environments (i.e.~new foods), ii) is able to detect viable but non
+culturable bacteria, and iii) uncovers contaminations during the
+process, which could help to adapt HACCP concepts. In this study we
+examined nine samples with high relative abundancies of
+\emph{Proteobacteria}, mainly \emph{Pseudomonas}, \emph{Psychrobacter}
+and \emph{Shewanella}. These three genera, are common spoilers in meat
+and fish products \citep{Odeyemi.2018}., especially in products with
+slightly higher pH values, like fish, sea food and poultry. Plant-based
+meat products are usually also slightly higher in pH (Quellen). Although
+the number of ASVs within a these genera is much higher, compared
+e.g.~with \emph{Leuconostoc} from other samples, what we associate with
+different sources of contamination, there are still single ASVs with
+relatively high abundancies, which indicates either a large entry from
+one source or an active growth on the product at some time point during
+the production. The most obvious sources would be the main protein, the
+used water (via biofilms in water reservoirs or water hoses) or biofilms
+during the process. From the found genera in the MiSeq data, at least 13
+are described as biofilm builders in food processing environments
+(Wagner et al.), among these \emph{Pseudomonas}, \emph{Psychrobacter}
+and \emph{Shewanella}. The possibility of biofilm formation on the
+processing equipment is high, since many of the used machines are hard
+to clean. However, this is contradicted by the fact that among the nine
+\emph{Proteobacteria}-dominated samples seven had a very similar
+pattern, but were from six different producers. There are no available
+studies on the microbial communities of raw soybean or pea proteins, but
+16S rRNA patterns of peas or the phyllosphere of soy do not support the
+thesis, that this kind of contamination is associated with the main
+protein source. Only sample B4, which is the only sample, that is
+dominated by \emph{Alphaproteobacteria}, had high similarities to the
+microbial community of the soy phyllosphere \citep{Vorholt.2012}.
+However, some of the producer just have a few products in this food
+segment, so we would not exclude, that they buy already extruded
+proteins from a large distributor and use it for their products.\\
+The comparison of the diversity of the different groups is limited.
+Since the study design was focused on describing the microbiota of
+different meat alternatives and to detect possible differences between
+main protein sources and texture, it was not quite balanced in other
+perspective. The two most frequently represented manufacturers
+contributed 18 (11+7) out of 32 products in this study, while the other
+seven manufacturers contributed with a maximum of two samples. As shown
+in Supplements Table 1 manufacturers have usually specialized their
+products to one of the four examined groups. We assume that the
+production plant has a non-negligible effect on the product's
+microbiota, which could be seen in part in Figure 3. Based on the
+microbial distribution patterns from the MiSeq data, we roughly describe
+three different community compositions. The \emph{Leuconostocaceae}
+dominated samples (14/27), the \emph{Latilactobacillus} dominated
+samples (4/27) and the \emph{Proteobacteria} dominated samples. In the
+first two groups each sample is clearly dominated by one ASV
+respectively. That speaks for the fact, that there was an active and
+growing population at any timepoint on the product. Beside of three
+samples, the dominating ASV assignable to an isolate, therefor we
+assume, that these species are actually active in the final product.
+This is especially true for the Lactic acid bacteria. The role of the
+isolated and sequenced LABs (especially \emph{Leuconostoc mesenteroides}
+and \emph{Latilactobacillus sakei}) on this product group has to be
+assessed from several perspectives. They are fermenters on many food
+products and contribute there to the formation of substances relevant to
+taste. They inhibit with their metabolites (i.e.~organic acids) and
+their secondary metabolites (i.e.~Bacteriocin) the growth of pathogens
+and spoilage bacteria, but they are spoilage bacteria themselves,
+especially on meat and meat products. Most of the isolated LABs have
+ambiguous positions in foods and food production. While
+\emph{Latilactobacillus} and \emph{Leuconostoc} were used for
+fermentation of tofu, tempeh or Kimchi, they were also commonly
+described as food spoilers in non-fermented products, like fresh meat
+\citep{Casaburi.2015}. Since the examined products were neither
+assignable as fermented food, nor had fermented products as ingredients
+(besides vinegar), we associated the isolated genera primarily in their
+position as product spoilers and not as part of a planned fermentation
+process. In 18 out of 27 samples with utilizable MiSeq data were lactic
+acid bacteria dominating (Leuconostoc 13, Lacto\emph{Bacillus} 4,
+Weissella 1), which is expectable as LABs are described as dominating
+species on fruits and vegetables {[}\citet{Yu} et al.~2020). While ten
+of the Leuconostoc dominated products were pea protein based, all four
+\emph{Latilactobacillus}-dominated samples were soy products. The
+microbial community of all of the pea products with fibrous structure
+had \textgreater95\% abundances of LABs (\emph{Leuconostoc},
+\emph{Latilactobacillus}, \emph{Weissella}, \emph{Carnobacterium}).
+\emph{Leuconostoc} is described to have a starting advantage over other
+LABs on plant products, based on its ability to \ldots{} According to
+that Leuconostoc is often described as dominating LAB at the beginning
+of a fermentation process.\\
+Diverse \emph{Latilactobacillus sakei} strains wurden erfolgreich auf
+verschiedensten Produkten als Biokonservativ getestet und ist im
+Regelfall im Vorteil gegenueber Leuconostoc. Zum einen spielen beide
+Spezies eine Rolle in der Fermentation von diversen pflanzlichen
+Produkten. In Kimchi ist Leuconostoc in den ersten Tagen, der
+dominierende LAB und wird zunehmend von \emph{Latilactobacillus sakei}
+verdraengt {[}\citet{Jeong} et al.~2013) Gaaerts et al., 2020 examined
+ready to vegetarian, vegan and insect based meat alternative, including
+products with fermented ingredients, like fermented sour dough. Based on
+that, they assumed sour dough as main source for \emph{Latilactobacillus
+sakei}, which they isolated most. Different to that study, we excluded
+products with fermented ingredients, but vinegar. Still we found large
+amounts of lactic acid bacteria in the examined products. Unlike
+Graeerts et al., we isolated Leuconostoc mesenteroides from the majority
+of the samples. This species is an obligate heterofermentative LAB,
+using the phosphoketolase pathway for glycolysis, with lactic acid,
+acetic acid, CO2 and ethanol as metabolites{[}\citet{Gaenzle} 2015).
+\ldots{} While \emph{Bacillus} spp. were frequently described as
+spoilers in bakery and dairy products, but also in meat and poultry,
+Leuconostoc spp. were mainly associated with the spoilage of meat and
+seafood but also of vegetables (minimally processed and ready to eat
+products \citep{Lianou.2016}. Lacto\emph{Bacillus} (meat, seafood)
+pseudomonas (meat, seafood, milk). Undoubtedly, some manufacturers are
+guided by those similarities when determining their products shelf life
+and consumption recommendations. Two manufacturer labelled all their
+products with expiry dates, the others with best before dates. We think
+that because of the novelty of these products and accompanying missing
+experience, consumers might not be able to recognize spoiled products by
+odor or taste. However, broader investigations tailored to this product
+category and considering the manifold microbial sources, could increase
+product stability, facilitate manufacturer's decision for product
+labelling, and help consumer to recognize spoiled products. Altogether,
+could reduce food waste and increase sustainability of these products.
+Beside the dominating, spoilage associated genera, we alos isolated some
+Enterobactericeae (i.e.~Raoultella, Kosakonia, Klebsiella,
+Escherichia/Shigella, Enterobacter, Citrobacter, Atlantibacter). All of
+these isolates came from products of the same manufacturer. In MiSeq the
+relative abundances of \emph{Enterobacteriaceae} were very low in all
+examined samples. All products were labelled with cooking instructions,
+most of them specific with cooking time in minutes, others only with
+``heat through before consumption''. This final heating step by the
+consumer can be a part of the HACCP concept of the manufacturer. While
+cooking time in minutes is a good guidance for the consumers, ``heat
+through'' alone is in our opinion too less information. First there is a
+lack of experience with these kind of products, second in contrast to
+real meat (products) there is no indicator like color change for most of
+these products to determine a sufficiently cooked state.
+\emph{Enterobacteriaceae} widely serve as hygiene indicators. According
+to the sequence data \emph{Enterobacteriaceae} had a minor role in the
+examined samples. However, we isolated seven different genera of
+Enterobactericeae, among these Enterobacter, Salmonella, Klebsiella and
+Citrobacter. This indicates, that the conditions in this product group
+are given for the survival of \emph{Enterobacteriaceae}, including
+potential human pathogenic species like Enterobacter aerogenes,
+Salmonella enterica, Klebsiella oxytoca and Citrobacter freundii.
+Knowing this, we would recommend process hygiene criteria for this
+product group and offering preparation instruction (incl.~cooking time)
+for all of the products.\\
+General statements about the microbiological risk of these products are
+difficult to make, since producers, consumers, regulatory authorities,
+and scientist are not quite experienced with these kind of products.
+(gueltige regulierungen, haccp concept) In terms of product safety, four
+critical issues are in the hands of consumers: spoilage detection,
+handling of the products and used utensils before cooking, the
+cooking/heating step and the storage for later consumption. Spoilage
+detection: 2 producer with expiration dates (orientierung an
+faschierten) rest laesst es den Konsumenten. Keine Erfahrungswerte
+unmoeglich am geruch zu erkennen, jedes produkt andere rezeptur. Mhd
+produkte tendetiell hoehere BCE. Große schwankungen in den shelf lifes.
+Handling of the products: kaum Erfahrung. Wird es wie Fleisch behandelt
+oder eher nachlaessig. Allgemeine Kuechenhygiene, eigene utensilien bzw.
+wschschritte handhygiene etc. wir sehen das pathogen in den rohen
+produkten wachsen koennen. Selbst wenn fleisch erhitzt wird bei
+fehlender kuechenhygiene hab ich das dann halt wo anders Cooking/heating
+step. Most oft he products have cooking instructions. Studie hat gezeigt
+dass die standard pathogene absterben wenn man die produkte wie fleisch
+entsprechend erhitzt. Fehlende instructions nicht befriedigend. Nur
+durcherhitzt verzehren als instruction zu wenig, da aqnders als bei
+Fleisch eine durcherhiztung optisch nicht erkannt werden kann Storage
+for later consumption: studie der ungarn. Halten tendentiell kuerzer als
+die fleisch pendants im kuehlschrank nach der zubereitung.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+\hypertarget{conflict-of-interest}{%
+\section{Conflict of Interest}\label{conflict-of-interest}}
+
+The authors confirm that they have no conflicts of interest with respect
+to the work described in this manuscript.
+
+\hypertarget{acknowledgements}{%
+\section{Acknowledgements}\label{acknowledgements}}
+
+We would like to thank Birgit Bromberger and Christoph Eisenreich for
+their active support in conducting the experiments.
+
+\hypertarget{contributions-of-authors}{%
+\section{Contributions of Authors}\label{contributions-of-authors}}
+
+\hypertarget{tables}{%
+\section{Tables}\label{tables}}
+
+\hypertarget{figures}{%
+\section{Figures}\label{figures}}
+
+\hypertarget{supplements}{%
+\section{Supplements}\label{supplements}}
+
+\renewcommand\refname{References}
+\bibliography{VeggieMeat.bib}
+
+
+\end{document}

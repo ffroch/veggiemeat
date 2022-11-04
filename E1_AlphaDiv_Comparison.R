@@ -39,6 +39,9 @@ for (i in 0:2){
   
 }
 
+kwpvals<-data.frame("method"=NA, "pval"=NA)
+dunnlist<-list()
+
 for (i in 0:2){
   dat<-hilldiv_m%>%
     filter(order==i, method=="bycoverage")
@@ -47,5 +50,12 @@ for (i in 0:2){
   print(qqnorm(aov$residuals))
   kw<-kruskal.test(qD~group,data=dat)
   print(kw)
+  kwpvals[i+1,1]=i
+  kwpvals[i+1,2]=kw$p.value
   print(dunn.test(dat$qD,dat$group, method="bonferroni"))
+  dunnpvals<-data.frame("method"=i,"pair"=dunn.test(dat$qD,dat$group, method="bonferroni")$comparisons, "adjpval"=dunn.test(dat$qD,dat$group, method="bonferroni")$P.adjusted )
+  dunnlist[[i+1]]<-dunnpvals
 }
+kwpvals
+saveRDS(kwpvals, "./06-outputfiles/alphadivkw.rds")
+saveRDS(dunnlist, "./06-outputfiles/alphadivdunn.rds")
