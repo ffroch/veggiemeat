@@ -13,7 +13,7 @@ and Silva 138.1 (full-length-uniform-classifier) according to https://zenodo.org
 Silva 138.1 database for R and blast : https://zenodo.org/record/4587955#.Yz1zz7bP2Uk
 
 
-#for Narciso :-)
+# for Narciso :-)
 
 so right now, there is an R file called Rworking.R that call all the separate R files in the correct order, also with comments when to do it (only the first time, optional and so on), the first time and optional stuff in the code is inactivated by #.
 
