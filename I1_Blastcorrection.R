@@ -14,7 +14,7 @@ n_occur[n_occur$Freq>1,]
 tocheck<-bestfits[bestfits$isolate.id %in% n_occur$Var1[n_occur$Freq >1],]
 
 tocheck<-join(tocheck, taxaqiime, type="left")
-
+isometa<-readRDS("./06-outputfiles/C_isometa.rds")
 
 tochecksamples<-join(tocheck, isometa, by="isolate.id",type="left")
 tochecksamples$relab<-0
@@ -73,5 +73,5 @@ write.table(final, "./06-outputfiles/cleaned_blastout.txt")
 write.table(prefiltersamples, "./06-outputfiles/prefiltered_blastout.txt")
   
 
-
+saveRDS(oturel,"./06-outputfiles/I1_oturel.rds")
 

@@ -1,3 +1,6 @@
+isometa<-readRDS("./06-outputfiles/C_isometa.rds")
+meta<-readRDS("./06-outputfiles/C_meta.rds")
+
 placeholder<-data.frame(isolate.id=names(assignedisolatesfasta))
 placeholder<-join(placeholder, isometa, by="isolate.id", type="left")
 placeholder<-join(placeholder, meta, by="sample.id", type="left")
@@ -6,7 +9,9 @@ placeholder<-join(placeholder, meta, by="sample.id", type="left")
 taxtab<-read.table("./06-outputfiles/complete-cleaned-filtered-isolates.txt",sep="\t")
 rownames(taxtab)<-taxtab$isolate.id
 taxmet<-taxtab[complete.cases(taxtab$sample.id),]
-
+#add unclassified Enterobactericeae as Genus
+taxmet$Genus<-ifelse(taxmet$Family=="Enterobacteriaceae", 
+                     ifelse(is.na(taxmet$Genus), "unclassified Enterobacteriaceae", taxmet$Genus),taxmet$Genus )
 
 samplelist<-unique(placeholder$sample.id[!is.na(placeholder$sample.id)])
 emptylist<-list()
@@ -143,3 +148,5 @@ for (i in 1:length(producerlist)){
 completelist<-ldply(emptylist,data.frame)
 
 write.table(completelist, "./06-outputfiles/listofuniqueisolatesperproducer.txt")
+
+saveRDS(taxmet, "./06-outputfiles/J1_taxmet.rds")

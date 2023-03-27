@@ -1,8 +1,9 @@
 #sample C4 (reads=439) is excluded
+data<-readRDS("./06-outputfiles/C_data.rds")
 datared<-data[,!grepl("C4",colnames(data))]#removal of sample Veggie20
 
 #rarefaction by size of 2463
-if(file.exists("./06-outputfiles/02rarefied-data-ByCoverage.txt"))
+if(file.exists("./06-outputfiles/02rarefied-data-BySize.txt"))
 {
   bysize<-read.table("./06-outputfiles/02rarefied-data-BySize.txt",header=T, sep=" ")
 }   else   {
@@ -16,7 +17,7 @@ if(file.exists("./06-outputfiles/02rarefied-data-ByCoverage.txt"))
 {
   bycoverage<-read.table("./06-outputfiles/02rarefied-data-ByCoverage.txt",header=T, sep=" ")
 }   else   {
-  bycoverage<-estimateD(data[,2:ncol(data)],base="coverage", level=0.995)
+  bycoverage<-estimateD(datared[,2:ncol(datared)],base="coverage", level=0.995)
   bycoverage$method="bycoverage"
   write.table(bycoverage,"./06-outputfiles/02rarefied-data-ByCoverage.txt")
 }
@@ -29,7 +30,7 @@ hilldiv_m<-join(hilldiv, meta, by="sample.id", type="left")
 #comparison of alpha diversity among the predefined groups----
 for (i in 0:2){
   dat<-hilldiv_m%>%
-    filter(order==i, method=="bysize")
+    filter(Order.q==i, method=="bysize")
   aov<-aov(qD~group,data=dat)
   print(summary(aov))
   print(qqnorm(aov$residuals))
@@ -44,7 +45,7 @@ dunnlist<-list()
 
 for (i in 0:2){
   dat<-hilldiv_m%>%
-    filter(order==i, method=="bycoverage")
+    filter(Order.q==i, method=="bycoverage")
   aov<-aov(qD~group,data=dat)
   print(summary(aov))
   print(qqnorm(aov$residuals))
@@ -57,5 +58,5 @@ for (i in 0:2){
   dunnlist[[i+1]]<-dunnpvals
 }
 kwpvals
-saveRDS(kwpvals, "./06-outputfiles/alphadivkw.rds")
-saveRDS(dunnlist, "./06-outputfiles/alphadivdunn.rds")
+saveRDS(kwpvals, "./06-outputfiles/E1_alphadivkw.rds")
+saveRDS(dunnlist, "./06-outputfiles/E1_alphadivdunn.rds")

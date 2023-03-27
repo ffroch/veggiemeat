@@ -1,15 +1,19 @@
-
+relab_po<-readRDS("./06-outputfiles/E4_relab_po.rds")
+isometa<-readRDS("./06-outputfiles/C_isometa.rds")
+meta<-readRDS("./06-outputfiles/C_meta.rds")
 isolates<-read.table("./06-outputfiles/prefiltered_blastout.txt", header=T, sep=" ")
 isolates$corrseqid=isolates$sseqid
 isolatesn<-isolates[,c(1,ncol(isolates))]
 names(isolatesn)<-c("isolate.id","sseqid")
-isolatesn1<-join(isolatesn,isometa, by="isolate.id",type="left")
-isolatesn2<-join(isolatesn1,meta,by="sample.id",type="left")
+isolatesn1<-plyr::join(isolatesn,isometa, by="isolate.id",type="left")
+isolatesn2<-plyr::join(isolatesn1,meta,by="sample.id",type="left")
 tax<-data.frame(tax_table(relab_po))
 tax$sseqid<-row.names(tax)
-isolatesn3<-join(isolatesn2,tax,by="sseqid",type="left")
+saveRDS(tax, "./06-outputfiles/I2_tax.rds")
+isolatesn3<-plyr::join(isolatesn2,tax,by="sseqid",type="left")
+oturel<-readRDS("./06-outputfiles/I1_oturel.rds")
 oturel$sseqid<-row.names(oturel)
-isolates<-join(isolatesn3,oturel,by="sseqid",type="left")
+isolates<-plyr::join(isolatesn3,oturel,by="sseqid",type="left")
 
 write.table(isolates, "./06-outputfiles/complete-cleaned-filtered-isolates.txt",sep="\t")
 
@@ -23,14 +27,14 @@ assignedisolatesfasta<-seqstrimclean[isolate_ids]
 writeXStringSet(assignedisolatesfasta,"./06-outputfiles/ValidBacterialIsolates.fa")
 
 counts<-data.frame("type"=NA, "counts"=NA)
-counts[1,]<-c("overall bacterial isolates", nrow(isolates)+15)#fungi isolates added
+counts[1,]<-c("overall bacterial isolates", nrow(isolates)+20)#fungi isolates added
 counts[2,]<-c("unassigned", nrow(isolates)-nrow(assignedisolates))
 counts[3,]<-c("assigned on genus level", nrow(assignedisolates%>%filter(!is.na(Genus))))
 counts[4,]<-c("only family level", nrow(assignedisolates%>%filter(is.na(Genus)))-nrow(assignedisolates%>%filter(is.na(Family))))
 counts[5,]<-c("number of genera", length(unique(assignedisolates$Genus)))
 counts[6,]<-c("number of phyla", length(unique(assignedisolates$Phylum)))
 counts[7,]<-c("number of Enterobacteriacea only family level", nrow(assignedisolates%>%filter(is.na(Genus),Family=="Enterobacteriaceae")))
-saveRDS(counts, file="./06-outputfiles/counts1.rds")
+saveRDS(counts, file="./06-outputfiles/I2_counts1.rds")
 
 
 #count isolates per genus, class and family
@@ -56,7 +60,7 @@ for (i in 1:length(isolatecounts$Genus)){
   prevalence[i,2]=length(unique(check$sample.id))
 }
 prevalence<-prevalence[order(-prevalence$samplecounts),]
-saveRDS(prevalence,"./06-outputfiles/isolateprevalence.rds")
+saveRDS(prevalence,"./06-outputfiles/I2_isolateprevalence.rds")
 
 groupprevalence<-data.frame("Genus"=NA,"samplecounts"=NA)
 for (i in 1:length(isolatecounts$Genus)){
@@ -68,7 +72,7 @@ for (i in 1:length(isolatecounts$Genus)){
 }
 groupprevalence<-groupprevalence[order(-groupprevalence$samplecounts),]
 groupprevalence
-saveRDS(groupprevalence,"./06-outputfiles/isolategroupprevalence.rds")
+saveRDS(groupprevalence,"./06-outputfiles/I2_isolategroupprevalence.rds")
 
 
 
@@ -110,3 +114,5 @@ isolatecounts<-assignedisolates%>%
   group_by(Genus,sample.id)%>%
   dplyr::summarise(n=n())%>%
   arrange(desc(n))
+
+saveRDS(isolates, "./06-outputfiles/I2_isolates.rds")

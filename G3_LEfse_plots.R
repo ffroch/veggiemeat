@@ -1,4 +1,5 @@
 #hand made LEfse plots
+combt<-readRDS("./06-outputfiles/G2_combt.rds")
 combtnames<-data.frame("sample.id"=rownames(combt))
 combtn<-cbind(combtnames, combt)
 
@@ -15,6 +16,8 @@ lefsefiltered<-lefseresults[!is.na(lefseresults$adjLDA),]
 longjoined<-join(combtnlong,lefsefiltered,by="feature", type="left")
 longfiltered<-longjoined[!is.na(longjoined$lefsegroup),]
 
+nicepal<-c("#AEB733", "#73832D", "#4DCF72", "#68D6C9")
+
 p1<-longfiltered%>%
   mutate(neworderfeature=reorder(newfeature,adjLDA))%>%
   ggplot(aes(relab,neworderfeature,col=group))+
@@ -29,7 +32,8 @@ p1<-longfiltered%>%
         plot.margin=unit(c(0.5,0.00001,0.5,0.02),"null"),
         axis.title.y= element_blank())+
   xlab("relative abundance")+
-  scale_color_brewer(palette="Paired")
+  scale_color_manual(values=nicepal)
+
 
 p2<-longfiltered%>%
   mutate(neworderfeature=reorder(newfeature,adjLDA))%>%
@@ -40,13 +44,16 @@ p2<-longfiltered%>%
   theme(axis.text.y=element_blank(),axis.title.y=element_blank(),axis.ticks.y=element_blank(),
         plot.margin=unit(c(0.5,0.5,0.5,0),"null"))+
   labs(x="LDA score (log 10)",fill="group")+
-  scale_fill_brewer(palette="Paired")
+  scale_fill_manual(values=nicepal)
+
 
 
 plot_grid(p1,p2,rel_widths=c(3,2),nrow=1)
-ggsave("./04-finalRplots/lefsestatplot.tiff")
+ggsave("./04-finalRplots/lefsestatplot.tiff", width=7,height=8, units="in",dpi=2000)
 
-nicepal<-RColorBrewer::brewer.pal(4,"Paired")
+ggsave("VeggieMeat/lefsestatplot.png", width=7,height=8, units="in",dpi=300)
+
+
 
 p3<-longfiltered%>%
   filter(lefsegroup=="pea-fibrous"| lefsegroup=="pea-minced")%>%
@@ -105,4 +112,6 @@ p6<-longfiltered%>%
   labs(x="LDA score (log 10)",fill="group")
 
 plot_grid(p3,p4,p5,p6,rel_widths=c(3,1),nrow=2)
-ggsave("./04-finalRplots/lefsestatplotdiffscales.tiff")
+ggsave("./04-finalRplots/lefsestatplotdiffscales.tiff", width=7,height=8, units="in",dpi=2000)
+
+ggsave("VeggieMeat/lefsestatplotdiffscales.png", width=7,height=8, units="in",dpi=300)

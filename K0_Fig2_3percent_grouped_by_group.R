@@ -1,11 +1,18 @@
 #join relative abundance data with taxonomy
+oturel<-readRDS("./06-outputfiles/I1_oturel.rds")
+oturel$sseqid<-row.names(oturel)
+tax<-readRDS("./06-outputfiles/I2_tax.rds")
 oturel_tax<-join(oturel, tax, by="sseqid", type="left")
+meta<-readRDS("./06-outputfiles/C_meta.rds")
+relab_po<-readRDS("./06-outputfiles/E4_relab_po.rds")
+
 
 #generate data structure for plotting, each sample needs the information if there are isolates or not and of the relative abundances
 list<-as.character(sample_names(relab_po))
 dflist<-vector(mode="list", length=length(list))
 i=1  
-  
+
+isolates<-readRDS("./06-outputfiles/I2_isolates.rds")  
 for (i in 1:length(list)){
     set<-isolates[grepl(list[i],isolates$sample.id),
                  c(1:grep("Species",colnames(isolates)),grep(list[i],colnames(isolates)))]
@@ -115,7 +122,7 @@ pal<-c(brewer.pal(n=11,name="PiYG")[c(1:5)],
        brewer.pal(n=11,name="BrBG")[c(1:5)],
        brewer.pal(n=11,name="RdBu")[c(5:1)],
        brewer.pal(n=11,name="Spectral")[c(4:7)],
-       "black")
+       "lightgrey")
 
 colorlist<-aggregate(relAb~newtax+sample.id,ohnenull, sum)
 colorlist<-colorlist[order(-colorlist$relAb),]
@@ -190,27 +197,36 @@ plot1d<-ohnenull_m%>%
 
 
 #make data structure for plot product group header
-ohnenulladd<-data.frame(sample.id=ohnenull_m$sample.id,protein.source=ohnenull_m$protein.source,texture=ohnenull_m$texture,
+ohnenulladd<-data.frame(sample.id=ohnenull_m$sample.id,protein.source=ohnenull_m$protein.source,group=ohnenull_m$group,
                         producer=paste0("M",substr(ohnenull_m$pseudoprod,10,10)),index4=ohnenull_m$index4)
 ohnenulladd_l<-data.frame(pivot_longer(ohnenulladd,2:4,names_to="rowclassifier",values_to="colorclassifier"))
 ohnenulladd_l$index5<-ifelse(ohnenulladd_l$rowclassifier=="producer",1,
-                             ifelse(ohnenulladd_l$rowclassifier=="texture",2,3))
-nicepal<-RColorBrewer::brewer.pal(11, "BrBG")[c(11,8,4,1)]
-colorlistadd<-c(brewer.pal(11,"BrBG")[c(1:4,7:11)],nicepal[c(1,2)],nicepal[c(3,4)])
+                             ifelse(ohnenulladd_l$rowclassifier=="group",2,3))
+#nicepal<-RColorBrewer::brewer.pal(11, "BrBG")[c(11,8,4,1)]
+nicepal<-c("#918D30", "#5BD39E", "#AEB733", "#73832D", "#4DCF72", "#68D6C9")
+colorlistadd<-c(brewer.pal(11,"BrBG")[c(1:4,7:11)],nicepal[3:6],nicepal[1:2])
+
+#addtext<-c("pea","soy","fibrous","minced","fibrous","minced","M9","M2","M1","M3","M9","M2","M7",
+  #         "M5","M6","M8","M3","M4","M5")
+#yvals<-c(3,3,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1)
+#xvals<-c("A4","C6","D6","A5","B4","B3","D6","D3","A1","A5","A6","D1","C3","B4","C5",
+   #     "C8","B8","B3","B2")
+#hjustval<-c(0.5,0.5,0,0,0,0,0.5,0.5,0,0,0.5,0.5,0.5,0,0,0.5,0.5,0.5,0)
 
 addtext<-c("pea","soy","fibrous","minced","fibrous","minced","M9","M2","M1","M3","M9","M2","M7",
            "M5","M6","M8","M3","M4","M5")
 yvals<-c(3,3,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1)
-xvals<-c("A4","C6","D6","A5","B4","B3","D6","D3","A1","A5","A6","D1","C3","B4","C5",
-        "C8","B8","B3","B2")
-hjustval<-c(0.5,0.5,0,0,0,0,0.5,0.5,0,0,0.5,0.5,0.5,0,0,0.5,0.5,0.5,0)
+xvals<-c("A4","C6","D6","A5","B5","B3","D3","D6","A1","A6","D1","A5","C5","C1","B4",
+         "C8","B8","B3","B2")
+hjustval<-c(0.5,0.5,0,0.5,0.5,0,0.5,0.5,0,0.5,0.5,0,0,0,0,0.5,0.5,0.5,0)
+
 
 sorter<-ohnenulladd_l%>%
       mutate(sample.id=fct_reorder(sample.id,index4),colorclassifier=fct_reorder(colorclassifier,index5))
 sorter<-sorter[complete.cases(sorter[,"sample.id"]),]
 sorter<-data.frame(sample.id=unique(sorter$sample.id))
 
-sorter$vjust<-c(rep(0:1,14))
+sorter$vjust<-c(rep(0:1,13),0)
 #sorter<-join(sorter,sample_names(relab_po),by="sample.id", type="left")
 
 
@@ -232,5 +248,8 @@ plot_grid(p1,plot1d,nrow=2,rel_heights = c(1,5))
 
 ggsave("04-finalRplots/Fig2_3percent.tiff", width=9.53,height=11, units="in",dpi=2000)
 
+ggsave("VeggieMeat/Fig2_3percent.png", width=9.53,height=11, units="in",dpi=300)
 
+saveRDS(relgen, "./06-outputfiles/K0_relgen.rds")
+saveRDS(ohnenull, "./06-outputfiles/K0_ohnenull.rds")
 

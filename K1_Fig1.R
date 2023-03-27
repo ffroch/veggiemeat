@@ -1,3 +1,5 @@
+meta<-readRDS("./06-outputfiles/C_meta.rds")
+taxmet<-readRDS("./06-outputfiles/J1_taxmet.rds")
 #isolate per product
 genprod<-taxmet%>%
   group_by(sample.id)%>%
@@ -55,13 +57,14 @@ ctlist1<-join(ctlist, presentgen[,1:6],by="Genus", type="left")
 ctlist2<-join(ctlist1, presentgen[,c(7:8)],by="sample.id", type="left")
 ctlist3<-unique(ctlist2)
 ctlist4<-join(ctlist3,gencounts[,1:3],by="sample.id", type="left")
-ctlist4$comblab<-paste0(ctlist4$ID," (",ctlist4$n,")")
+ctlist4$comblab<-paste0(ctlist4$sample.id," (",ctlist4$n,")")
 
 #replace unnecessary strings in taxonomy
 toclean<-c("Kingdom","Phylum","Class", "Order", "Family", "Genus")
 for (i in toclean){
 ctlist4[,i]<-sapply(ctlist4[,i],function(x)gsub(".*\\_\\_","",as.character(x)))
 }
+colnames(ctlist4)[11]<-"cat_2"
 
 #add information for point size which indicates different "species" within a genus
 prodspec<-read.table("./06-outputfiles/listofuniqueisolatesperproduct.txt")
@@ -98,35 +101,33 @@ ctlist7<-join(ctlist7,pres,by=c("Genus","comblab"),type="left")
 
 #add relative abundances
 ##get latest folder for input data for relative abundance data
-firstpat<-"030_Fig2_TaxonomyPlotn"
-files <- list.files(pattern = firstpat, recursive = TRUE, include.dirs = TRUE)
-dirs <- files[ file.info(files)$isdir ]
-dates<-substr(dirs,regexpr("_",dirs)+1,nchar(dirs))
-newpat<-paste(firstpat,as.character(max(as.Date(str_sub(dirs,-10)))),sep="_")
-inputdir4<-list.files(pattern=newpat,include.dirs=T)
-relAb<-read.table(paste0(inputdir4,"/relAb_per_ASV_product_new.txt"),sep="\t")
-relAbgen<-aggregate(relAb$relAb~relAb$Genus+relAb$ID,FUN=sum)
-colnames(relAbgen)<-c("Genus", "ID", "relAb")
+relAb<-read.table("./06-outputfiles/relAb_per_ASV_product_new.txt",sep="\t")
+relAb$Genus<-ifelse(relAb$Family=="Enterobacteriaceae", 
+                     ifelse(is.na(relAb$Genus), "unclassified Enterobacteriaceae", relAb$Genus),relAb$Genus )
+relAbgen<-aggregate(relAb$relAb~relAb$Genus+relAb$sample.id,FUN=sum)
+colnames(relAbgen)<-c("Genus", "sample.id", "relAb")
+relAbgen$relAb<-relAbgen$relAb*100
 #add rel ab data
-ctlist8<-join(ctlist7,relAbgen,by=c("Genus", "ID"),type="left")
+ctlist8<-join(ctlist7,relAbgen,by=c("Genus", "sample.id"),type="left")
 ctlist8$relAb<-ifelse(is.na(ctlist8$relAb),0,ctlist8$relAb)
 
 
 
 #generate a dataset of genera, presented in MiSeq with at least 10% but without isolates
+relAb$relAb<-relAb$relAb*100
 relAbfil<-relAb[relAb$relAb>=10,]
 comp<-unique(ctlist8$Genus)
 newGen<-relAbfil$Genus[!grepl(paste(comp,collapse="|"),relAbfil$Genus)]
 relAbmissing<-relAb[grepl(paste(newGen,collapse="|"),relAb$Genus),]
-relAbsum<-aggregate(relAbmissing$relAb~relAbmissing$Genus+relAbmissing$ID,FUN=sum)
-colnames(relAbsum)<-c("Genus", "ID", "relAb")
-products<-unique(ctlist8$ID)
-ctlist8a<-expand.grid(Genus=newGen,ID=products)
+relAbsum<-aggregate(relAbmissing$relAb~relAbmissing$Genus+relAbmissing$sample.id,FUN=sum)
+colnames(relAbsum)<-c("Genus", "sample.id", "relAb")
+products<-unique(ctlist8$sample.id)
+ctlist8a<-expand.grid(Genus=newGen,sample.id=products)
 tax<-unique(relAbmissing[,3:8])
 ctlist8a<-join(ctlist8a,tax,type="left")
 label<-unique(ctlist8[,c(2,8:10)])
 ctlist8a<-join(ctlist8a,label,type="left")
-ctlist8a$comblab<-paste0(ctlist8a$ID," (",ctlist8a$n,")")
+ctlist8a$comblab<-paste0(ctlist8a$sample.id," (",ctlist8a$n,")")
 ctlist8a$specct<-0
 ctlist8a$present<-0
 ctlist8a<-join(ctlist8a,relAbsum,type="left")
@@ -142,19 +143,19 @@ ctlist9<-rbind(ctlist8,ctlist8a)
 
 
 #calculate mean relative abundances per group and manufacturer
-ctlist9_m<-join(ctlist9[ctlist9$cat=="product",],meta2,by="ID",type="left")
-meanrelabproducer<-aggregate(ctlist9_m$relAb,list(ID=ctlist9_m$pseudoprod,Genus=ctlist9_m$Genus),mean)
-meanrelabid<-aggregate(ctlist9_m$relAb,list(ID=ctlist9_m$ID,Genus=ctlist9_m$Genus),mean)
-meanrelabprottex<-aggregate(ctlist9_m$relAb, list(ID=ctlist9_m$prottex,Genus=ctlist9_m$Genus),mean)
+ctlist9_m<-join(ctlist9[ctlist9$cat=="product",],meta,by="sample.id",type="left")
+meanrelabproducer<-aggregate(ctlist9_m$relAb,list(sample.id=ctlist9_m$pseudoprod,Genus=ctlist9_m$Genus),mean)
+meanrelabid<-aggregate(ctlist9_m$relAb,list(sample.id=ctlist9_m$sample.id,Genus=ctlist9_m$Genus),mean)
+meanrelabprottex<-aggregate(ctlist9_m$relAb, list(sample.id=ctlist9_m$group,Genus=ctlist9_m$Genus),mean)
 meanrelab<-rbind(meanrelabid,meanrelabproducer,meanrelabprottex)
-colnames(meanrelab)<-c("ID","Genus","meanrelab")
+colnames(meanrelab)<-c("sample.id","Genus","meanrelab")
 
 #combine present absent lists ctlist9 with mean relative abundances meanrelab
-ctlist10<-join(ctlist9,meanrelab,by=c("ID","Genus"),type="left")
+ctlist10<-join(ctlist9,meanrelab,by=c("sample.id","Genus"),type="left")
 #adapt color palette for relative abundance data with own breaks
 ctlist10$logrelAb<-ifelse(is.na(ctlist10$relAb),0,
                          ifelse(ctlist10$relAb==0,0,log10(ctlist10$relAb+1)))
-ctlist10$meanrelabclus<-discretize(ctlist10$meanrelab,method="fixed", breaks=c(0,0.00001,0.1,1,10,20,40,60,80,100))
+ctlist10$meanrelabclus<-discretize(ctlist10$meanrelab,method="fixed", breaks=c(0,0.00001,0.1,1,10,20,40,60,80,100.1))
 #add color palette
 pal<-brewer.pal(n=9,"YlOrRd")
 pal2<-c("white",pal)
@@ -192,10 +193,10 @@ names(class.labs)<-classlist
 ctlist10<-ctlist10[complete.cases(ctlist10[,"Class"]),]
 
 #change sample order fitting to new grouporder
-meta2<-meta2[order(meta2$main_prot,meta2$category,meta2$producer,meta2$ID),]
-meta2$index3<-c(1:nrow(meta2))
-newindex<-data.frame(ID=meta2$ID,index3=meta2$index3)
-ctlist10<-join(ctlist10,newindex,by="ID",type="left")
+meta<-meta[order(meta$protein.source,meta$texture,meta$pseudoprod,meta$sample.id),]
+meta$index3<-c(1:nrow(meta))
+newindex<-data.frame(sample.id=meta$sample.id,index3=meta$index3)
+ctlist10<-join(ctlist10,newindex,by="sample.id",type="left")
 
 
 #plot
@@ -221,8 +222,8 @@ ctlist10%>%
   xlab("")
 
 #save plot
-ggsave(paste0(outputdir,"Fig1inclmeanrelab.tiff"), width=9.53,height=12, units="in",dpi=300)
+ggsave("./04-finalRplots/Fig1inclmeanrelab.tiff", width=9.53,height=12, units="in",dpi=2000)
+ggsave("./VeggieMeat/Fig1inclmeanrelab.png", width=9.53,height=12, units="in",dpi=300)
 
-#knitr::stitch_rhtml(paste0(scriptname,".R"),output=paste0(outputdir,scriptname,"_",Sys.Date(),".html"))
 
 

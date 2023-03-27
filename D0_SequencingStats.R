@@ -1,4 +1,5 @@
 #reads per sample
+data<-readRDS("./06-outputfiles/C_data.rds")
 reads<-data.frame(sample.id=colnames(data)[2:ncol(data)],reads=colSums(data[,2:ncol(data)]))
 reads
 min1<-min(reads$reads)
@@ -36,6 +37,7 @@ reads %>%
   geom_line()+
   coord_cartesian(xlim=c(0,10),ylim=c(0,20000))
 
+saveRDS(reads, "./06-outputfiles/D0_reads.rds")
 
 datalong<-pivot_longer(data, 2:ncol(data), names_to="sample", values_to="reads")
 datalong %>%
