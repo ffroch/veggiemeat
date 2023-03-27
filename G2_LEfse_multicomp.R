@@ -31,3 +31,6 @@ filtered_BY<-pvaldf[pvaldf$adjpval.BY<0.05,]
 print(filtered_KW)
 print(filtered_BH)
 print(filtered_BY)
+
+
+saveRDS(combt,"./06-outputfiles/G2_combt.rds")

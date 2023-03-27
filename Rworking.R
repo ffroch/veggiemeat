@@ -18,12 +18,13 @@ source("C_PrepareData.R")
 
 
 
-#we decided to rarefy based on coverage (option 1) - the second option was size based (option 2)
+#we decided to rarefy based on coverage (option 3) - the second option was size based (option 2)
 #for option 1 we set a coverage of 99.5%. Since all 28 samples had a high coverage, we used all of them
 #for option 2 we excluded sample C4 with 439 reads and rarefied all samples to 2463 reads
+#for option 3 we ecluded sample C4 AND set a coverage of 99.5%
 
 #OPTIONAL - alpha diversities with both options in comparison
-#source("E1_AlphaDiv_Comparison.R)
+source("E1_AlphaDiv_Comparison.R")
 
 #alpha diversity analysis with coverage based rarefaction
 source("E2_AlphaDiv.R")
@@ -32,6 +33,9 @@ source("E2_AlphaDiv.R")
 #classic alpha diversity with coverage rarefied data - Shannon, Simpson, Faith's PD 
 source("E3_AlphaDiv_classic.R")
 
+
+#data filtering to remove sample C4 for all further analysis
+source("E4_PrepareData2.R")
 
 #beta-diversity is done with 100 iterations of coverage based rarefaction
 source("F0_RarefactionAndDistanceMatrices.R")
@@ -78,3 +82,11 @@ source("J1_ClusteringIsolates.R")
 
 #plot figure 2
 source("K0_Fig2_3percent_grouped_by_group.R")
+
+
+#plot figure 1
+source("K1_Fig1.R")
+
+#text references
+source("L0_prevalentSpecies.R")
+

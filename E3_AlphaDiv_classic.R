@@ -21,7 +21,16 @@ divsize2463<-estimate_richness(raresize2463, measures=c("Observed", "Shannon", "
 divsize2463$meth<-"size2463"
 divsize2463$sample.id<-rownames(divsize2463)
 
-methcomp<-rbind(divunrar, divc, divsize439, divsize2463)
+#remove 439 size sample for coverage raref 
+phylo_object_red<-subset_samples(phylo_object,sample.id!="C4")
+set.seed(12345)
+rarecred<-phyloseq_coverage_raref(phylo_object_red,iter=1,coverage=0.995)
+saveRDS(rarecred,"./06-outputfiles/E3_rarecred.rds")
+divcred<-estimate_richness(rarecred, measures=c("Observed", "Shannon", "Simpson"))
+divcred$meth<-"covred"
+divcred$sample.id<-rownames(divcred)
+
+methcomp<-rbind(divunrar, divc, divsize439, divsize2463, divcred)
 methcomplong<-data.frame(pivot_longer(methcomp, 1:3, names_to="index", values_to="values"))
 
 ggplot(methcomplong, aes(x=sample.id, y=values, col=meth ))+
@@ -45,8 +54,11 @@ pd439$sample.id<-rownames(pd439)
 pd2463<-estimate_pd(raresize2463)
 pd2463$meth<-"size2463"
 pd2463$sample.id<-rownames(pd2463)
+pdcred<-estimate_pd(rarecred)
+pdcred$meth<-"covred"
+pdcred$sample.id<-rownames(pdcred)
 
-pdbind<-rbind(pdunrar, pdc, pd439, pd2463)
+pdbind<-rbind(pdunrar, pdc, pd439, pd2463,pdcred)
 ggplot(pdbind, aes(x=sample.id, y=PD, col=meth ))+
   geom_jitter(width=0.3, alpha=0.5)
 
@@ -61,6 +73,14 @@ ggplot(combineall, aes(x=sample.id, y=values, col=meth ))+
 combineall_m<-join(combineall,meta,type="left")
 combineall_m%>%
   filter(meth=="cov")%>%
+  ggplot(aes(x=group, y=values))+
+  geom_boxplot()+
+  geom_jitter(size=3,alpha=0.5,position=position_jitter(width=0.3,seed=4))+
+  facet_wrap(~index, scales="free", ncol=2)+
+  theme_bw()
+
+combineall_m%>%
+  filter(meth=="covred")%>%
   ggplot(aes(x=group, y=values))+
   geom_boxplot()+
   geom_jitter(size=3,alpha=0.5,position=position_jitter(width=0.3,seed=4))+

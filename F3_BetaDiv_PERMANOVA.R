@@ -1,5 +1,9 @@
 #PERMANOVA----
 #betadispersion
+
+relab_po<-readRDS("./06-outputfiles/E4_relab_po.rds")
+#import list of distance matrices 
+dmlist<-readRDS("./06-outputfiles/F0_dmlist.rds")
 varlist<-c("group", "protein.source", "texture")
 for (i in 1:length(dmlist)){
   for (j in 1:length(varlist)){
@@ -44,6 +48,10 @@ for (i in 1:length(dmlist)){
 #for supplements
 dir.create("./06-outputfiles/permanovatables/")
 
+#import single distance matrices
+bd<-readRDS("./06-outputfiles/F0_bd.rds")
+jd<-readRDS("./06-outputfiles/F0_jd.rds")
+jsd<-readRDS("./06-outputfiles/F0_jsd.rds")
 dmlistshort<-list(bd, jd, jsd)
 dmlistnamesshort<-c("bray", "jaccard", "jsd")
 permanova<-read_docx()
@@ -83,4 +91,15 @@ for (i in 1:length(dmlistshort)){
   varexpl[i,2]<-(1-adonis2(formula=dmlistshort[[i]]~protein.source*texture, data=data.frame(sample_data(relab_po)), perm=999)$R2[4])*100
 }
 
-saveRDS(varexpl,"./06-outputfiles/permanovaR2.rds")
+saveRDS(varexpl,"./06-outputfiles/F3_permanovaR2.rds")
+
+#with shortlist including manufacturer
+varexplman<-data.frame("method"=NA, "R2"=NA)
+for (i in 1:length(dmlistshort)){
+  print(dmlistnamesshort[i])
+  varexplman[i,1]<-dmlistnamesshort[i]
+  set.seed(1234)
+  varexplman[i,2]<-(1-adonis2(formula=dmlistshort[[i]]~protein.source*texture+pseudoprod, data=data.frame(sample_data(relab_po)), perm=999)$R2[5])*100
+}
+
+saveRDS(varexplman,"./06-outputfiles/F3_permanovaR2man.rds")

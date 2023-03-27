@@ -19,7 +19,7 @@
 "18" "Serratia" 1 "producer 2"
 "19" "Staphylococcus" 1 "producer 2"
 "20" "Stenotrophomonas" 1 "producer 2"
-"21" NA 11 "producer 2"
+"21" "unclassified Enterobacteriaceae" 11 "producer 2"
 "22" "Acinetobacter" 1 "producer 5"
 "23" "Bacillus" 13 "producer 5"
 "24" "Latilactobacillus" 2 "producer 5"

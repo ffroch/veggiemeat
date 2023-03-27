@@ -36,7 +36,7 @@ B8	Veggie16	producer 3	soy	minced	unclear	noMAP	notfrozen	22	f	3-5 min	best befo
 C1	Veggie17	producer 5	soy	fibrous	pre-heated	MAP	frozen	13	f	3-5 min	expiration date	no rec.	very low/neg	0	Pro	Proteobacteria	6
 C2	Veggie18	producer 5	soy	minced	pre-heated	MAP	frozen	18	f	5-8 min	expiration date	no rec.	medium	no rec.			22
 C3	Veggie19	producer 5	soy	fibrous	pre-heated	MAP	frozen	10	f	5-8 min	expiration date	no rec.	medium	no rec.	La	Lactobacillus	16
-C4	Veggie20	producer 5	soy	fibrous	pre-heated	MAP	frozen	24	f	5-8 min	expiration date	no rec.	medium	no rec.			18
+C4	Veggie20	producer 5	soy	fibrous	pre-heated	MAP	frozen	24	f	5-8 min	expiration date	no rec.	medium	no rec.	Pro	Proteobacteria	18
 C5	Veggie21	producer 7	soy	fibrous	pre-heated	MAP	notfrozen	0	o	3-5 min	best before date	consume only thorougly heated	high	no rec.	Le	Leuconostocaceae	14
 C6	Veggie22	producer 7	soy	fibrous	pre-heated	MAP	notfrozen	0	o	3-5 min	best before date	consume only thorougly heated	medium	no rec.	Le	Leuconostocaceae	19
 C7	Veggie23	producer 7	soy	fibrous	pre-heated	MAP	notfrozen	0	o	3-5 min	best before date	consume only thorougly heated	high	no rec.			21
