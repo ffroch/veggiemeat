@@ -1,5 +1,0 @@
-"Phylum"	"n"
-"1"	"Firmicutes"	345
-"2"	"Proteobacteria"	95
-"3"	"Actinobacteriota"	6
-"4"	"Deinococcota"	1
