@@ -21,6 +21,9 @@ that these products are suitable for their presence.
 # Comments 
 
 01-metadata contains metadata of the samples and the isolates
+
 02-rawdata contains only the Sanger Sequencing Data of the isolates 16S rRNA gene sequencing data of the samples can be found at ENA under project Accession number PRJEB73555
+
 09-MinIon contains the bash codes for the analysis of the MinIon Data of the tested isolates the MinIon data itself can be found at ENA
+
 A-Z are the R codes used for the analysis
