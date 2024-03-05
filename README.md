@@ -1,5 +1,8 @@
 # Microbial community structure of plant-based meat alternatives
 
+DOI:10.21203/rs.3.rs-3334082/v1
+
+
 Abstract:
 A reduction in animal-based diets has driven market demand for alternative meat products, currently raising
 a new generation of plant-based meat alternatives (PBMAs). It remains unclear whether these substitutes are
